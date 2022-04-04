@@ -31,8 +31,20 @@ namespace Toggler_Service
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ServiceToggler", Version = "v1" });
             });
 
-            services.AddDbContext<ServiceTogglerContext>(options =>
-                   options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+            int chosenDB = Configuration.GetValue("ChosenDB", 0);
+            switch ((DataProviderEnum)chosenDB)
+            {
+                case DataProviderEnum.SQLServer:
+                    services.AddDbContext<ServiceTogglerContext>(options =>
+                           options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+                    break;
+                case DataProviderEnum.InMemory:
+                default:
+                    services.AddDbContext<ServiceTogglerContext>(options =>
+                           options.UseInMemoryDatabase(Configuration.GetConnectionString("InMemory")));
+                    break;
+            }
+
 
             services.AddTransient<IServiceService, ServiceService>();
             services.AddTransient<IToggleService, ToggleService>();
@@ -51,8 +63,8 @@ namespace Toggler_Service
 
             app.UseHttpsRedirection();
 
-            app.UseRouting(); 
-            
+            app.UseRouting();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
@@ -60,5 +72,11 @@ namespace Toggler_Service
 
             app.UseCors(builder => builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod());
         }
+    }
+    public enum DataProviderEnum
+    {
+        InMemory = 0,
+        SQLServer = 1
+
     }
 }

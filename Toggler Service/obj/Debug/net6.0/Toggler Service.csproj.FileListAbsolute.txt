@@ -59,3 +59,4 @@ C:\Users\rita.almeida\Documents\Service-Toggler\Toggler Service\obj\Debug\net6.0
 C:\Users\rita.almeida\Documents\Service-Toggler\Toggler Service\obj\Debug\net6.0\ref\Toggler Service.dll
 C:\Users\rita.almeida\Documents\Service-Toggler\Toggler Service\obj\Debug\net6.0\Toggler Service.pdb
 C:\Users\rita.almeida\Documents\Service-Toggler\Toggler Service\obj\Debug\net6.0\Toggler Service.genruntimeconfig.cache
+C:\Users\rita.almeida\Documents\Service-Toggler\Toggler Service\obj\Debug\net6.0\Toggler Service.csproj.AssemblyReference.cache
